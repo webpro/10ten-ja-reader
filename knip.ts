@@ -27,11 +27,20 @@ const config: KnipConfig = {
     // The tailwind config file is just here for when we need to manually update
     // the docs.
     'docs/update/tailwind.config.js',
+    // Ignore React Cosmos fixtures.
+    'src/**/*.fixture.tsx',
   ],
   ignoreDependencies: [
     // Used by our browser test and automatically detected by playwright-test.
     'mocha',
     '@types/mocha',
+    // Used by React Cosmos
+    'react',
+    'react-dom',
+    // React Cosmos plugins (which knip doesn't know how to parse yet)
+    'react-cosmos-plugin-webpack',
+    // Plugins required by React Cosmos but not explicitly referenced
+    'html-webpack-plugin',
   ],
   ignoreExportsUsedInFile: {
     interface: true,
@@ -44,6 +53,8 @@ const config: KnipConfig = {
     // the webpack config. So we have to specify it explicitly.
     config: 'webpack.config.js',
     entry: [
+      // Webpack config used by React Cosmos
+      'cosmos-webpack.config.js',
       // Our webpack setup is very complicated. It's not surprising knip can't
       // untagle it.
       'webpack.config.js',
